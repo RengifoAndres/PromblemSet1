@@ -21,10 +21,9 @@ db <- import("https://github.com/ignaciomsarmiento/datasets/blob/main/GEIH_sampl
 
 
 
-db <- as_tibble(db) %>% rename(gender=sex,
-                               profesion=oficio) 
+db <- as_tibble(db) %>% rename(gender=sex) 
 
-
+db<-db %>% filter(!is.na(y_ingLab_m))
 
 
 db_of<- db %>% 
@@ -33,5 +32,5 @@ db_of<- db %>%
   mutate(ofic_ingLab= ofic_ingLab/1000)
 
 
-db_of  %>% dplyr:: select(profesion, gender, profesion_ingLab) %>% head(4)
+db_of  %>% dplyr:: select(oficio, gender, ofic_ingLab) %>% head(4)
 
