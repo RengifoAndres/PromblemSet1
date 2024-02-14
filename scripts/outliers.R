@@ -21,17 +21,18 @@ db <- import("https://github.com/ignaciomsarmiento/datasets/blob/main/GEIH_sampl
 
 
 
-db <- as_tibble(db) %>% rename(gender=sex) 
+db <- as_tibble(db) %>% rename(gender=sex,
+                               profesion=oficio) 
 
 
 
 
 db_of<- db %>% 
-  group_by(oficio, gender)  %>% 
-  summarise(ofic_ingLab= mean(y_ingLab_m, na.rm=T), .groups="drop") %>%
-  mutate(ofic_ingLab= ofic_ingLab/1000000)
+  group_by(profesion, gender)  %>% 
+  summarise(profesion_ingLab= mean(y_ingLab_m, na.rm=T), .groups="drop") %>%
+  mutate(profesion_ingLab= profesion_ingLab/1000000)
 
 
 
-db_of  %>% dplyr:: select(oficio, gender, ofic_ingLab) %>% head(4)
+db_of  %>% dplyr:: select(profesion, gender, profesion_ingLab) %>% head(4)
 
